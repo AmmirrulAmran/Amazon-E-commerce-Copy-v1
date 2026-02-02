@@ -1,4 +1,10 @@
-export let cart = [
+export let cart = 
+
+JSON.parse(localStorage.getItem('cart'));
+
+//if cart empty
+if(!cart){
+  cart = [
 
   {
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -14,7 +20,15 @@ export let cart = [
 
 
 ];
+}
 
+
+
+
+
+function saveToStorage(){
+  localStorage.setItem('cart', JSON.stringify(cart))
+}
 
  export function addToCart(productId) {
     let matchingItem;
@@ -33,8 +47,10 @@ export let cart = [
         quantity: 1,
       });
     }
-  }
 
+    
+saveToStorage();
+  }
 
 
 
@@ -49,4 +65,6 @@ export let cart = [
     cart = newCart
 
     console.log(cart)
+
+    saveToStorage();
   }
